@@ -1,3 +1,7 @@
+Bấm để xem chi tiết cấu trúc
+
+
+
 src/
 ├── types/              # Chứa các interface/type TypeScript của ứng dụng
 │   └── index.ts
