@@ -1,4 +1,4 @@
-Bấm để xem chi tiết cấu trúc
+Chuyển sang code để xem chi tiết cấu trúc
 
 
 
