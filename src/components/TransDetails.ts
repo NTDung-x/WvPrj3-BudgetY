@@ -14,6 +14,7 @@ const renderTransDetailItems = (
   const isEmerald = tone === 'emerald'
   const textColor = isEmerald ? 'text-emerald-400' : 'text-red-500'
   const subCategoryColor = isEmerald ? 'text-emerald-400/90' : 'text-red-400/90'
+  const hoverBg = isEmerald ? 'hover:bg-emerald-950/40' : 'hover:bg-red-950/40'
   const sign = isEmerald ? '+' : '-'
 
   return items
@@ -22,27 +23,27 @@ const renderTransDetailItems = (
       const categoryName = category?.name ?? 'Khác'
 
       return `
-        <li class="flex items-center justify-between gap-3 rounded-xl bg-stone-900/60 hover:bg-stone-900 border border-stone-800/40 px-4 py-3.5 transition group">
+        <li class="flex items-center justify-between gap-3 rounded-xl bg-stone-900/60 ${hoverBg} border border-stone-800/40 px-4 py-3.5 transition group overflow-x-hidden">
           <div class="min-w-0">
-            <p class="text-sm font-medium text-stone-100 truncate">
+            <p class="text-sm font-normal text-stone-100 truncate">
               ${item.description || categoryName}
             </p>
             <p class="text-xs text-stone-400 mt-1">
-              <span class="${subCategoryColor} font-medium">${categoryName}</span>
+              <span class="${subCategoryColor} font-normal">${categoryName}</span>
               <span> · </span>
               <span>${formatDate(item.date)}</span>
             </p>
           </div>
 
-          <div class="flex items-center space-x-3 shrink-0">
-            <span class="font-semibold tabular-nums whitespace-nowrap text-base ${textColor}">
+          <div class="relative flex items-center justify-end shrink-0">
+            <span class="font-normal tabular-nums whitespace-nowrap text-base ${textColor} transition-transform duration-200 ease-out group-hover:-translate-x-10">
               ${sign}${formatCurrency(item.amount)}
             </span>
             <button
               type="button"
               data-action="delete"
               data-id="${item.id}"
-              class="text-xs text-stone-500 hover:text-red-400 transition cursor-pointer px-1 py-0.5 opacity-0 group-hover:opacity-100"
+              class="absolute right-0 text-xs text-stone-500 hover:text-red-400 transition-opacity duration-200 opacity-0 group-hover:opacity-100 cursor-pointer"
               title="Xóa giao dịch"
             >
               Xóa
@@ -67,14 +68,14 @@ export const renderTransDetails = (): string => {
       <!-- Thu nhập -->
       <section class="h-full flex flex-col min-h-0">
         <div class="py-4 text-center">
-          <h2 class="text-xs uppercase tracking-[0.25em] text-emerald-400 font-semibold">
+          <h2 class="text-xs uppercase tracking-[0.25em] text-emerald-400 font-normal">
             Thu nhập
           </h2>
-          <div class="mt-1 flex items-center justify-center gap-4 font-semibold tabular-nums">
+          <div class="mt-1 flex items-center justify-center gap-4 font-normal tabular-nums">
             <span class="text-emerald-400 text-2xl">
               +${formatCurrency(totalIncome)}
             </span>
-            <span class="text-stone-400 font-medium text-m">
+            <span class="text-stone-400 font-normal text-m">
               trên ${incomeList.length} giao dịch
             </span>
           </div>
@@ -87,14 +88,14 @@ export const renderTransDetails = (): string => {
       <!-- Chi tiêu -->
       <section class="h-full flex flex-col min-h-0">
         <div class="py-4 text-center">
-          <h2 class="text-xs uppercase tracking-[0.25em] text-red-500 font-semibold">
+          <h2 class="text-xs uppercase tracking-[0.25em] text-red-500 font-normal">
             Chi tiêu
           </h2>
-          <div class="mt-1 flex items-center justify-center gap-4 font-semibold tabular-nums">
+          <div class="mt-1 flex items-center justify-center gap-4 font-normal tabular-nums">
             <span class="text-red-500 text-2xl">
               -${formatCurrency(totalExpense)}
             </span>
-            <span class="text-stone-400 font-medium text-m">
+            <span class="text-stone-400 font-normal text-m">
               trên ${expenseList.length} giao dịch
             </span>
           </div>

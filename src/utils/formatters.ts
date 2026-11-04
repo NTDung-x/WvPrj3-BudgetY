@@ -4,7 +4,7 @@ export const formatCurrency = (amount: number, currency: string = 'VND'): string
 
   const absAmount = Math.abs(amount)
 
-  if (absAmount >= 1e8) {
+  if (absAmount >= 1e12) {
     const exp = amount
       .toExponential(2)
       .replace(/\.00(?=e)/, '')
