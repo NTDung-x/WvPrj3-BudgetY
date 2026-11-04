@@ -64,32 +64,40 @@ export const renderTransDetails = (): string => {
 
   return `
     <main class="h-full grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-12 max-w-7xl mx-auto w-full">
-      <!-- Income -->
+      <!-- Thu nhập -->
       <section class="h-full flex flex-col min-h-0">
-        <div class="py-4 flex items-end justify-between">
-          <div>
-            <h2 class="text-xs uppercase tracking-[0.25em] text-emerald-400 font-semibold">Thu nhập</h2>
-            <p class="text-xs text-stone-500 mt-1">${incomeList.length} giao dịch</p>
+        <div class="py-4 text-center">
+          <h2 class="text-xs uppercase tracking-[0.25em] text-emerald-400 font-semibold">
+            Thu nhập
+          </h2>
+          <div class="mt-1 flex items-center justify-center gap-4 font-semibold tabular-nums">
+            <span class="text-emerald-400 text-2xl">
+              +${formatCurrency(totalIncome)}
+            </span>
+            <span class="text-stone-400 font-medium text-m">
+              trên ${incomeList.length} giao dịch
+            </span>
           </div>
-          <p class="text-2xl font-semibold tabular-nums text-emerald-400">
-            +${formatCurrency(totalIncome)}
-          </p>
         </div>
         <ul id="income-list-container" class="flex-1 overflow-y-auto space-y-2.5 pr-2">
           ${renderTransDetailItems(incomeList, 'emerald', 'Chưa có khoản thu nhập nào')}
         </ul>
       </section>
 
-      <!-- Expense -->
+      <!-- Chi tiêu -->
       <section class="h-full flex flex-col min-h-0">
-        <div class="py-4 flex items-end justify-between">
-          <div>
-            <h2 class="text-xs uppercase tracking-[0.25em] text-red-500 font-semibold">Chi tiêu</h2>
-            <p class="text-xs text-stone-500 mt-1">${expenseList.length} giao dịch</p>
+        <div class="py-4 text-center">
+          <h2 class="text-xs uppercase tracking-[0.25em] text-red-500 font-semibold">
+            Chi tiêu
+          </h2>
+          <div class="mt-1 flex items-center justify-center gap-4 font-semibold tabular-nums">
+            <span class="text-red-500 text-2xl">
+              -${formatCurrency(totalExpense)}
+            </span>
+            <span class="text-stone-400 font-medium text-m">
+              trên ${expenseList.length} giao dịch
+            </span>
           </div>
-          <p class="text-2xl font-semibold tabular-nums text-red-500">
-            -${formatCurrency(totalExpense)}
-          </p>
         </div>
         <ul id="expense-list-container" class="flex-1 overflow-y-auto space-y-2.5 pr-2">
           ${renderTransDetailItems(expenseList, 'red', 'Chưa có khoản chi tiêu nào')}
