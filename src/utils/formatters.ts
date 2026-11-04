@@ -1,5 +1,18 @@
-// Định dạng tiền tệ VNĐ
+// Định dạng VNĐ
 export const formatCurrency = (amount: number, currency: string = 'VND'): string => {
+  if (!Number.isFinite(amount)) return '0 đ'
+
+  const absAmount = Math.abs(amount)
+
+  if (absAmount >= 1e8) {
+    const exp = amount
+      .toExponential(2)
+      .replace(/\.00(?=e)/, '')
+      .replace(/(\.[0-9])0(?=e)/, '$1')
+      .replace('+', '')
+    return `${exp} đ`
+  }
+
   return new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: currency,
