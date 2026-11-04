@@ -66,6 +66,28 @@ class TransactionManager {
   getCategoryById(categoryId: string): Category | undefined {
     return this.categories.find((cat) => cat.id === categoryId)
   }
+
+  // Nếu danh mục đã tồn tại thì lấy, chưa có thì tạo mới
+  getOrCreateCategory(name: string, type: TransactionType): Category {
+    const trimmedName = name.trim()
+    const existing = this.categories.find(
+      (c) => c.name.toLowerCase() === trimmedName.toLowerCase() && c.type === type,
+    )
+
+    if (existing) {
+      return existing
+    }
+
+    const newCategory: Category = {
+      id: crypto.randomUUID(),
+      name: trimmedName,
+      type,
+    }
+
+    this.categories.push(newCategory)
+    StorageService.saveCategories(this.categories)
+    return newCategory
+  }
 }
 
 export const transManager = new TransactionManager()

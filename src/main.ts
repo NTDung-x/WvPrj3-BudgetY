@@ -1,66 +1,55 @@
 import './style.css'
-import heroImg from './assets/hero.png'
-import typescriptLogo from './assets/typescript.svg'
-import viteLogo from './assets/vite.svg'
-import { setupCounter } from './counter.ts'
+import { renderOverview, setupOverviewEvents, updateOverviewBalance } from '@/components/Overview'
+import { renderDialog, setupDialogEvents } from '@/components/TransAddDialog'
+import {
+  renderTransDetails,
+  setupTransDetailsEvents,
+  updateTransDetails,
+} from '@/components/TransDetails'
 
 const app = document.querySelector<HTMLDivElement>('#app')
 
+const openDialog = (): void => {
+  const dialogContainer = document.querySelector<HTMLDivElement>('#dialog-container')
+  if (dialogContainer) {
+    dialogContainer.innerHTML = renderDialog()
+    setupDialogEvents(closeDialog)
+  }
+}
+
+const closeDialog = (): void => {
+  const dialogContainer = document.querySelector<HTMLDivElement>('#dialog-container')
+  if (dialogContainer) {
+    dialogContainer.innerHTML = ''
+  }
+}
+
 if (app) {
   app.innerHTML = `
-    <section id="center">
-      <div class="hero">
-        <img src="${heroImg}" class="base" width="170" height="179">
-        <img src="${typescriptLogo}" class="framework" alt="TypeScript logo"/>
-        <img src="${viteLogo}" class="vite" alt="Vite logo" />
-      </div>
-      <div>
-        <h1>Get started</h1>
-        <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
-      </div>
-      <button id="counter" type="button" class="counter"></button>
-    </section>
+    <div id="app-root" class="relative h-screen flex flex-col bg-stone-950 text-stone-100 font-sans select-none overflow-hidden">
+      
+      <!-- Background (sẽ thêm hiệu ứng/hình nền sau) -->
+      <div id="app-bg-layer" class="absolute inset-0 pointer-events-none -z-10"></div>
 
-    <div class="ticks"></div>
+      <!-- Overview & Thống kê số dư -->
+      ${renderOverview()}
 
-    <section id="next-steps">
-      <div id="docs">
-        <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-        <h2>Documentation</h2>
-        <p>Your questions, answered</p>
-        <ul>
-          <li>
-            <a href="https://vite.dev/" target="_blank">
-              <img class="logo" src="${viteLogo}" alt="" />
-              Explore Vite
-            </a>
-          </li>
-          <li>
-            <a href="https://www.typescriptlang.org" target="_blank">
-              <img class="button-icon" src="${typescriptLogo}" alt="">
-              Learn more
-            </a>
-          </li>
-        </ul>
+      <!-- Chi tiết Thu nhập & Chi tiêu -->
+      <div id="trans-details-container" class="basis-2/3 min-h-0 pb-6">
+        ${renderTransDetails()}
       </div>
-      <div id="social">
-        <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-        <h2>Connect with us</h2>
-        <p>Join the Vite community</p>
-        <ul>
-          <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-          <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-          <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-          <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-        </ul>
-      </div>
-    </section>
 
-    <div class="ticks"></div>
-    <section id="spacer"></section>
+      <!-- Dialog -->
+      <div id="dialog-container"></div>
+    </div>
   `
-  const counterBtn = document.querySelector<HTMLButtonElement>('#counter')
-  if (counterBtn) {
-    setupCounter(counterBtn)
-  }
+
+  setupOverviewEvents(openDialog)
+  setupTransDetailsEvents()
+
+  // Đồng bộ giao diện khi có thay đổi dữ liệu
+  document.addEventListener('budgety:updated', () => {
+    updateOverviewBalance()
+    updateTransDetails()
+  })
 }

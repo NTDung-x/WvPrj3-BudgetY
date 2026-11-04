@@ -6,11 +6,14 @@ const STORAGE_KEY = {
 } as const
 
 export const DEFAULT_CATEGORIES: Category[] = [
-  { id: '1', name: 'Salary', type: 'income' },
-  { id: '2', name: 'Investing', type: 'income' },
-  { id: '3', name: 'Food', type: 'expense' },
-  { id: '4', name: 'Transportation', type: 'expense' },
-  { id: '5', name: 'Entertainment', type: 'expense' },
+  { id: '1', name: 'Lương', type: 'income' },
+  { id: '2', name: 'Đầu tư', type: 'income' },
+  { id: '3', name: 'Làm thêm', type: 'income' },
+  { id: '4', name: 'Ăn uống', type: 'expense' },
+  { id: '5', name: 'Di chuyển', type: 'expense' },
+  { id: '6', name: 'Nhà ở', type: 'expense' },
+  { id: '7', name: 'Mua sắm', type: 'expense' },
+  { id: '8', name: 'Giải trí', type: 'expense' },
 ]
 
 export const StorageService = {
