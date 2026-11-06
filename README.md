@@ -9,10 +9,9 @@ src/
 │ ├── transManager # Nắm giữ trạng thái: Lưu trans, cats; đồng bộ local; tính toán
 │ └── storage.ts
 ├── components/ # Các module render giao diện (HTML + gắn event listeners)
-│ ├── Header.ts
-│ ├── SummaryCards.ts # Thẻ tổng quan: Thu nhập, Chi tiêu, Số dư
-│ ├── TransactionForm.ts
-│ └── TransactionList.ts
+│ ├── Overview.ts
+│ ├── TransDetails.ts 
+│ └── TransAddDialog.ts
 ├── utils/ # Các hàm bổ trợ (format tiền tệ, format ngày tháng)
 │ └── formatters.ts
 ├── style.css # File CSS chứa @import "tailwindcss"
