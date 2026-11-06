@@ -28,7 +28,7 @@ if (app) {
   app.innerHTML = `
     <div id="app-root" class="relative h-screen flex flex-col bg-stone-950 text-stone-100 font-sans select-none overflow-hidden">
       
-      <!-- Background (sẽ thêm hiệu ứng/hình nền sau) -->
+      <!-- Background -->
       <div id="app-bg-layer" class="absolute inset-0 pointer-events-none -z-10"></div>
 
       <!-- Overview & Thống kê số dư -->
