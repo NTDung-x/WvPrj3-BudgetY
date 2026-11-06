@@ -76,7 +76,7 @@ export const renderTransDetails = (): string => {
               +${formatCurrency(totalIncome)}
             </span>
             <span class="text-stone-400 font-normal text-m">
-              trên ${incomeList.length} giao dịch
+              / ${incomeList.length} giao dịch
             </span>
           </div>
         </div>
@@ -96,7 +96,7 @@ export const renderTransDetails = (): string => {
               -${formatCurrency(totalExpense)}
             </span>
             <span class="text-stone-400 font-normal text-m">
-              trên ${expenseList.length} giao dịch
+              / ${expenseList.length} giao dịch
             </span>
           </div>
         </div>
